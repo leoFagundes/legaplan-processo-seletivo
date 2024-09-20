@@ -1,0 +1,48 @@
+/* Colors */
+$white: #fff;
+$black: #000;
+$opacity-black: rgba(0, 0, 0, 0.54);
+$white-secondary: #f7f9fd;
+
+$blue-100: #a0dcf6;
+$blue-200: #53c0f0;
+$blue-300: #0796d3;
+
+$red-100: #f05353;
+$red-200: #d30707;
+
+$gray-100: #e7eefb;
+$gray-200: #eaecf0;
+$gray-300: #d7dde9;
+$gray-400: #b0bbd1;
+
+/*Background Colors*/
+$bg-linear-blue: linear-gradient(90deg, $blue-300 0%, $blue-200 68.65%);
+$bg-linear-red: linear-gradient(90deg, $red-200 0%, $red-100 68.65%);
+
+/* Shadows */
+$card-shadow: 0px 24px 48px -12px #1018282e;
+
+/* Typography */
+$font-family: "Inter Tight", sans-serif;
+
+.heading {
+  font-size: 24px;
+  line-height: 29px;
+  font-weight: 500;
+  color: $black;
+}
+
+.text {
+  font-size: 16px;
+  line-height: 19.36px;
+  color: $black;
+
+  &-regular {
+    font-weight: 400;
+  }
+
+  &-medium {
+    font-weight: 500;
+  }
+}

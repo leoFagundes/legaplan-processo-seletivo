@@ -1,0 +1,21 @@
+@import "../../styles/theme.module.scss";
+
+.container {
+  display: flex;
+  align-items: flex-start;
+  height: 60px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid $gray-300;
+  width: 100%;
+
+  .content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+
+    .date {
+      color: $opacity-black;
+    }
+  }
+}

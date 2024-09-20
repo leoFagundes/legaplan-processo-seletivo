@@ -1,0 +1,33 @@
+@import "../../../styles/theme.module.scss";
+
+.container {
+  display: flex;
+  align-items: center;
+  border: 1px dashed $gray-300;
+  border-radius: 8px;
+  padding: 16px;
+  width: 100%;
+  gap: 16px;
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    border: 1px solid transparent;
+    background-color: $white-secondary;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .task-label {
+    flex: 1;
+  }
+
+  .trash-icon {
+    color: $gray-400;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

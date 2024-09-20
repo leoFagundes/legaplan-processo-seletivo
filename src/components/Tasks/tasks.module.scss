@@ -1,0 +1,16 @@
+@import "../../styles/theme.module.scss";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 450px;
+  padding: 32px;
+  border-radius: 16px;
+  gap: 24px;
+  border: 1px solid $gray-200;
+
+  .task-heading {
+    color: $opacity-black;
+  }
+}

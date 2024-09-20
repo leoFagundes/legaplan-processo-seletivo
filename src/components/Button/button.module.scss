@@ -1,0 +1,20 @@
+@import "../../styles/theme.module.scss";
+
+.container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 51px;
+  border-radius: 8px;
+  border: none;
+  padding: 16px 24px;
+  color: $white;
+}
+
+.primary {
+  background: $bg-linear-blue;
+}
+
+.danger {
+  background: $bg-linear-red;
+}
