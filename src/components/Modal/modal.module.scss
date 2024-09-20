@@ -1,0 +1,44 @@
+@import "../../styles/theme.module.scss";
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  top: 0;
+  left: 0;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(2px);
+  z-index: 2;
+  animation: shadeIn 0.2s ease-in-out forwards;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    width: 450px;
+    background-color: $white;
+    box-shadow: $card-shadow;
+    padding: 32px;
+    border-radius: 16px;
+    gap: 32px;
+
+    &:hover {
+      cursor: default;
+    }
+  }
+}
+
+@keyframes shadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

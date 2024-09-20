@@ -23,11 +23,27 @@
     flex: 1;
   }
 
+  .checked {
+    text-decoration: line-through;
+    color: $opacity-black;
+  }
+
   .trash-icon {
     color: $gray-400;
+    transition: color 0.3s ease-in-out;
 
     &:hover {
       cursor: pointer;
+      color: $red-100;
     }
+  }
+
+  .buttons {
+    display: flex;
+    gap: 16px;
+  }
+
+  .modal-text {
+    color: $opacity-black;
   }
 }

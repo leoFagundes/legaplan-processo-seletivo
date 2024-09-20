@@ -3,12 +3,17 @@
 .container {
   display: flex;
   justify-content: center;
+  align-items: center;
   width: 100%;
   height: 51px;
   border-radius: 8px;
   border: none;
   padding: 16px 24px;
   color: $white;
+
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .primary {
@@ -17,4 +22,9 @@
 
 .danger {
   background: $bg-linear-red;
+}
+
+.ligth {
+  background-color: $gray-100;
+  color: $black;
 }

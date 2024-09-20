@@ -3,7 +3,7 @@ import styles from "./button.module.scss";
 
 interface ButtonProps extends ComponentProps<"button"> {
   children: ReactNode;
-  variant?: "primary" | "danger";
+  variant?: "primary" | "danger" | "ligth";
 }
 
 export default function Button({

@@ -1,0 +1,19 @@
+@import "../../styles/theme.module.scss";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  .input {
+    width: 100%;
+    border-radius: 8px;
+    border: 1px solid $gray-300;
+    padding: 16px;
+    outline: none;
+
+    &::placeholder {
+      color: $opacity-black;
+    }
+  }
+}
