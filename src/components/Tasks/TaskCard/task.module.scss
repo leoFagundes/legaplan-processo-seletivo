@@ -41,6 +41,10 @@
   .buttons {
     display: flex;
     gap: 16px;
+
+    @media screen and (max-width: 576px) {
+      flex-direction: column-reverse;
+    }
   }
 
   .modal-text {

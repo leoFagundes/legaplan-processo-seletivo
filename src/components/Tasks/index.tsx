@@ -1,48 +1,42 @@
 "use client";
 
-import { useEffect, useId, useState } from "react";
+import { useState } from "react";
 import styles from "./tasks.module.scss";
 import { TaskProps } from "@/types/types";
 import TaskCard from "./TaskCard";
 import Button from "../Button";
 import Modal from "../Modal";
 import Input from "../Input";
+import { v4 as uuidv4 } from "uuid";
 
 export default function Tasks() {
-  const [tasks, setTasks] = useState<TaskProps[]>([]);
+  const [tasks, setTasks] = useState<TaskProps[]>(() => {
+    const storedTasks = localStorage.getItem("task-items");
+
+    return storedTasks ? JSON.parse(storedTasks) : [];
+  });
   const [createModalOpen, setCreateModalOpen] = useState(false);
+  const [inputTask, setInputTask] = useState("");
 
-  const id = useId();
+  function handleCreateTask() {
+    if (!inputTask.trim()) {
+      console.log("Task vazia");
+      return;
+    }
 
-  useEffect(() => {
-    setTasks([
-      {
-        id: id,
-        completed: false,
-        label: "Lavar as mãos",
-        date: new Date(),
-      },
-      {
-        id: id,
-        completed: false,
-        label: "Fazer um bolo",
-        date: new Date(),
-      },
-      {
-        id: id,
-        completed: false,
-        label: "Lavar a louça",
-        date: new Date(),
-      },
+    const newTask: TaskProps = {
+      id: uuidv4(),
+      completed: false,
+      date: new Date(),
+      label: inputTask,
+    };
 
-      {
-        id: id,
-        completed: true,
-        label: "Levar o lixo para fora",
-        date: new Date(),
-      },
-    ]);
-  }, []);
+    setTasks([...tasks, newTask]);
+
+    localStorage.setItem("task-items", JSON.stringify([...tasks, newTask]));
+
+    setCreateModalOpen(false);
+  }
 
   const completedTasks = tasks.filter((task) => task.completed);
   const incompleteTasks = tasks.filter((task) => !task.completed);
@@ -58,7 +52,7 @@ export default function Tasks() {
               Suas tarefas de hoje
             </span>
             {incompleteTasks.map((task, index) => (
-              <TaskCard key={index} task={task} />
+              <TaskCard key={index} task={task} setTasks={setTasks} />
             ))}
           </>
         )}
@@ -70,7 +64,7 @@ export default function Tasks() {
               Tarefas finalizadas
             </span>
             {completedTasks.map((task, index) => (
-              <TaskCard key={index} task={task} />
+              <TaskCard key={index} task={task} setTasks={setTasks} />
             ))}
           </>
         )}
@@ -92,12 +86,17 @@ export default function Tasks() {
         onClose={() => setCreateModalOpen(false)}
         onSubmit={() => ""}
       >
-        <Input label="Titulo" placeholder="Digite" />
+        <Input
+          value={inputTask}
+          onChange={(e) => setInputTask(e.target.value)}
+          label="Titulo"
+          placeholder="Digite"
+        />
         <div className={styles.buttons}>
           <Button variant="ligth" onClick={() => setCreateModalOpen(false)}>
             Cancelar
           </Button>
-          <Button onClick={() => ""}>Adicionar</Button>
+          <Button onClick={handleCreateTask}>Adicionar</Button>
         </div>
       </Modal>
     </section>
