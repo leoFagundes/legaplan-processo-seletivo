@@ -4,7 +4,7 @@ import { TaskProps } from "@/types/types";
 import styles from "./task.module.scss";
 import { FiTrash } from "react-icons/fi";
 import CheckBox from "@/components/CheckBox";
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useState, useEffect } from "react";
 import Modal from "@/components/Modal";
 import Button from "@/components/Button";
 
@@ -16,21 +16,24 @@ interface TaskCardProps {
 export default function TaskCard({ task, setTasks }: TaskCardProps) {
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
 
+  const updateLocalStorage = (tasks: TaskProps[]) => {
+    localStorage.setItem("task-items", JSON.stringify(tasks));
+    setTasks(tasks);
+  };
+
   function handleToggleTask() {
     const storedTasks = localStorage.getItem("task-items");
 
     if (storedTasks) {
-      let tasks: TaskProps[] = JSON.parse(storedTasks);
-
-      tasks = tasks.map((storedTask) => {
+      const tasks: TaskProps[] = JSON.parse(storedTasks);
+      const updatedTasks = tasks.map((storedTask) => {
         if (storedTask.id === task.id) {
           return { ...storedTask, completed: !storedTask.completed };
         }
         return storedTask;
       });
 
-      localStorage.setItem("task-items", JSON.stringify(tasks));
-      setTasks(tasks);
+      updateLocalStorage(updatedTasks);
     }
   }
 
@@ -38,12 +41,12 @@ export default function TaskCard({ task, setTasks }: TaskCardProps) {
     const storedTasks = localStorage.getItem("task-items");
 
     if (storedTasks) {
-      let tasks: TaskProps[] = JSON.parse(storedTasks);
+      const tasks: TaskProps[] = JSON.parse(storedTasks);
+      const updatedTasks = tasks.filter(
+        (storedTask) => storedTask.id !== task.id
+      );
 
-      tasks = tasks.filter((storedTask) => storedTask.id !== task.id);
-
-      localStorage.setItem("task-items", JSON.stringify(tasks));
-      setTasks(tasks);
+      updateLocalStorage(updatedTasks);
       setDeleteModalOpen(false);
     }
   }
@@ -74,7 +77,7 @@ export default function TaskCard({ task, setTasks }: TaskCardProps) {
           Tem certeza que você deseja deletar essa tarefa?
         </span>
         <div className={styles.buttons}>
-          <Button variant="ligth" onClick={() => setDeleteModalOpen(false)}>
+          <Button variant="light" onClick={() => setDeleteModalOpen(false)}>
             Cancelar
           </Button>
           <Button variant="danger" onClick={handleDeleteTask}>

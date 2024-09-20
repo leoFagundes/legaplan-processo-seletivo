@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "./tasks.module.scss";
 import { TaskProps } from "@/types/types";
 import TaskCard from "./TaskCard";
@@ -10,13 +10,16 @@ import Input from "../Input";
 import { v4 as uuidv4 } from "uuid";
 
 export default function Tasks() {
-  const [tasks, setTasks] = useState<TaskProps[]>(() => {
-    const storedTasks = localStorage.getItem("task-items");
-
-    return storedTasks ? JSON.parse(storedTasks) : [];
-  });
+  const [tasks, setTasks] = useState<TaskProps[]>([]);
   const [createModalOpen, setCreateModalOpen] = useState(false);
   const [inputTask, setInputTask] = useState("");
+
+  useEffect(() => {
+    const storedTasks = localStorage.getItem("task-items");
+    if (storedTasks) {
+      setTasks(JSON.parse(storedTasks));
+    }
+  }, []);
 
   function handleCreateTask() {
     if (!inputTask.trim()) {
@@ -31,11 +34,12 @@ export default function Tasks() {
       label: inputTask,
     };
 
-    setTasks([...tasks, newTask]);
-
-    localStorage.setItem("task-items", JSON.stringify([...tasks, newTask]));
+    const updatedTasks = [...tasks, newTask];
+    setTasks(updatedTasks);
+    localStorage.setItem("task-items", JSON.stringify(updatedTasks));
 
     setCreateModalOpen(false);
+    setInputTask("");
   }
 
   const completedTasks = tasks.filter((task) => task.completed);
@@ -93,7 +97,7 @@ export default function Tasks() {
           placeholder="Digite"
         />
         <div className={styles.buttons}>
-          <Button variant="ligth" onClick={() => setCreateModalOpen(false)}>
+          <Button variant="light" onClick={() => setCreateModalOpen(false)}>
             Cancelar
           </Button>
           <Button onClick={handleCreateTask}>Adicionar</Button>
