@@ -4,7 +4,7 @@ import { TaskProps } from "@/types/types";
 import styles from "./task.module.scss";
 import { FiTrash } from "react-icons/fi";
 import CheckBox from "@/components/CheckBox";
-import { Dispatch, SetStateAction, useState, useEffect } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import Modal from "@/components/Modal";
 import Button from "@/components/Button";
 
