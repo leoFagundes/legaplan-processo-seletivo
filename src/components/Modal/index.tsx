@@ -1,6 +1,5 @@
-import { MouseEvent, ReactNode } from "react";
+import { ReactNode } from "react";
 import styles from "./modal.module.scss";
-import Button from "../Button";
 
 interface ModalProps {
   isOpen: boolean;

@@ -2,7 +2,9 @@ import { ComponentProps } from "react";
 import styles from "./checkbox.module.scss";
 import { FiCheck } from "react-icons/fi";
 
-interface CheckBoxProps extends ComponentProps<"input"> {}
+interface CheckBoxProps extends ComponentProps<"input"> {
+  checked: boolean;
+}
 
 export default function CheckBox({ checked, ...props }: CheckBoxProps) {
   return (
