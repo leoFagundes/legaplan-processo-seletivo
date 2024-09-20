@@ -19,20 +19,8 @@
     }
 
     .date {
-      display: flex;
-      justify-content: center;
       color: $opacity-black;
       text-align: center;
-      position: relative;
-
-      &:hover {
-        cursor: pointer;
-      }
-
-      .date-picker {
-        position: absolute;
-        transform: translateY(48px);
-      }
     }
   }
 
